@@ -20,6 +20,7 @@
     "build-esm": "^4.2.0",
     "flow-bin": "^0.82.0",
     "flow-typed": "^2.5.1",
+    "into-stream": "^3.1.0",
     "overdub": "^2.1.0",
     "semantic-release": "^15.9.17",
     "standard-esnext": "^5.1.8"

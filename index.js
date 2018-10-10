@@ -1,2 +1,2 @@
 /* @flow */
-export default 'Hello World!'
+export * from './sources'
