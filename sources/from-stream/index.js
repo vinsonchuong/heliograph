@@ -4,7 +4,7 @@ import type { Readable } from 'stream'
 
 export default async function*(
   stream: Readable
-): AsyncGenerator<mixed, void, void> {
+): AsyncGenerator<any, void, void> {
   stream.pause()
 
   let ended = false
