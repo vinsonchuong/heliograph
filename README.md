@@ -4,7 +4,7 @@
 [![dependencies Status](https://david-dm.org/splayd/heliograph/status.svg)](https://david-dm.org/splayd/heliograph)
 [![devDependencies Status](https://david-dm.org/splayd/heliograph/dev-status.svg)](https://david-dm.org/splayd/heliograph?type=dev)
 
-An awesome package
+Tools to support message passing
 
 ## Usage
 Install [heliograph](https://yarnpkg.com/en/package/heliograph)

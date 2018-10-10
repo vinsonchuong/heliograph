@@ -1,7 +1,7 @@
 {
   "name": "heliograph",
   "version": "0.0.0",
-  "description": "An awesome package",
+  "description": "Tools to support message passing",
   "keywords": [],
   "homepage": "https://github.com/splayd/heliograph",
   "bugs": "https://github.com/splayd/heliograph/issues",
