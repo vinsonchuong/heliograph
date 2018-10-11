@@ -1,7 +1,7 @@
 {
   "name": "heliograph",
   "version": "0.0.0",
-  "description": "Tools to support message passing",
+  "description": "Tools to support message passing via async iterators",
   "keywords": [],
   "homepage": "https://github.com/splayd/heliograph",
   "bugs": "https://github.com/splayd/heliograph/issues",
