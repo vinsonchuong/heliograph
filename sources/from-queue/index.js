@@ -13,7 +13,7 @@ export default function<T>(): AsyncIterator<T> & {
   // $FlowFixMe
   return {
     // $FlowFixMe
-    [Symbol.asyncInterator]() {
+    [Symbol.asyncIterator]() {
       return this
     },
 
