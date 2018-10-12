@@ -26,3 +26,17 @@ test('consuming and waiting for values from a queue', async t => {
   }
   await consume()
 })
+
+test('pushing errors', async t => {
+  t.plan(1)
+
+  const queue = fromQueue()
+
+  await sleep(100)
+  queue.pushError(new Error('Something went wrong'))
+
+  async function consume() {
+    await t.throwsAsync(queue.next(), 'Something went wrong')
+  }
+  await consume()
+})

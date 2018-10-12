@@ -2,10 +2,12 @@
 
 export default function<T>(): AsyncIterator<T> & {
   push: T => void,
+  pushError: Error => void,
   end: () => void
 } {
   const queue = []
   let interrupt = null
+  let error = null
   let ended = false
 
   // $FlowFixMe
@@ -16,11 +18,15 @@ export default function<T>(): AsyncIterator<T> & {
     },
 
     async next() {
-      if (queue.length === 0 && !ended) {
+      if (queue.length === 0 && !ended && !error) {
         await new Promise(resolve => {
           interrupt = resolve
         })
         interrupt = null
+      }
+
+      if (error) {
+        throw error
       }
 
       if (queue.length > 0) {
@@ -34,6 +40,13 @@ export default function<T>(): AsyncIterator<T> & {
 
     push(value) {
       queue.push(value)
+      if (interrupt) {
+        interrupt()
+      }
+    },
+
+    pushError(err) {
+      error = err
       if (interrupt) {
         interrupt()
       }

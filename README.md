@@ -34,6 +34,8 @@ async function produce() {
   queue.push(2)
   await sleep(2000)
   queue.push(3)
+
+  // queue.pushError(new Error('Something went wrong'))
   queue.end()
 }
 
