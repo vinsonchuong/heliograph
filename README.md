@@ -49,6 +49,29 @@ produce()
 consume()
 ```
 
+#### `fromEventEmitter()`
+Creates an async iterator that queues up events from an `EventEmitter`.
+
+```js
+import EventEmitter from 'events'
+import { fromEventEmitter } from 'heliograph'
+
+async function run() {
+  const eventEmitter = new EventEmitter()
+  const iterator = fromEventEmitter(eventEmitter, 'message')
+
+  eventEmitter.emit('message', 1)
+  eventEmitter.emit('message', 2)
+  eventEmitter.emit('message', 3)
+
+  for await (const message of iterator) {
+    console.log(message)
+  }
+}
+
+run()
+```
+
 #### `fromStream(readableStream)`
 Creates an async iterator that pulls values from a Readable Stream.
 

@@ -1,4 +1,4 @@
-// @flow
+/* @flow */
 import test from 'ava'
 import { promisify } from 'util'
 import { fromQueue } from 'heliograph'
