@@ -88,3 +88,36 @@ async function run() {
 
 run()
 ```
+
+### Operators
+
+#### `merge(...iterators)`
+Merge together multiple async iterators
+
+```js
+import { promisify } from 'util'
+import { merge } from 'heliograph'
+
+const sleep = promisify(setTimeout)
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function* letters() {
+  yield 'a'
+  yield 'b'
+  yield 'c'
+}
+
+async function run() {
+  const iterator = merge(numbers(), letters())
+  for await (const { source, value } of iterator) {
+    console.log(source, value)
+  }
+}
+
+run()
+```
