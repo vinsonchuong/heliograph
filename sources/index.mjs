@@ -1,4 +1,8 @@
 /* @flow */
-export { default as fromQueue } from './from-queue'
-export { default as fromEventEmitter } from './from-event-emitter'
-export { default as fromStream } from './from-stream'
+import fromQueueModule from './from-queue'
+import fromEventEmitterModule from './from-event-emitter'
+import fromStreamModule from './from-stream'
+
+export const fromQueue = fromQueueModule.default
+export const fromEventEmitter = fromEventEmitterModule.default
+export const fromStream = fromStreamModule.default

@@ -1,2 +1,4 @@
 /* @flow */
-export { default as merge } from './merge'
+import mergeModule from './merge'
+
+export const merge = mergeModule
