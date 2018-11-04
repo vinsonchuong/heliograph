@@ -18,12 +18,12 @@
   "devDependencies": {
     "ava": "^1.0.0-beta.8",
     "build-esm": "^4.2.0",
-    "flow-bin": "^0.83.0",
+    "flow-bin": "^0.85.0",
     "flow-typed": "^2.5.1",
     "into-stream": "^4.0.0",
     "overdub": "^2.2.0",
-    "semantic-release": "^15.10.5",
-    "standard-esnext": "^5.1.8"
+    "semantic-release": "^15.10.7",
+    "standard-esnext": "^5.2.0"
   },
   "ava": {
     "require": "overdub/register",
