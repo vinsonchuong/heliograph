@@ -1,7 +1,7 @@
 /* @flow */
 
-export default function<T>(): AsyncIterator<T> & {
-  push: T => void,
+export default function<Item>(): AsyncIterator<Item> & {
+  push: Item => void,
   pushError: Error => void,
   end: () => void
 } {

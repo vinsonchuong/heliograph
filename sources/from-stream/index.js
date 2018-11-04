@@ -1,10 +1,10 @@
-/* eslint-disable no-unmodified-loop-condition, flowtype/no-weak-types */
+/* eslint-disable no-unmodified-loop-condition */
 /* @flow */
 import type { Readable } from 'stream'
 
-export default async function*(
+export default async function* /*:: <Item> */ ( /* eslint-disable-line */
   stream: Readable
-): AsyncGenerator<any, void, void> {
+): AsyncGenerator<Item, void, void> {
   stream.pause()
 
   let ended = false
@@ -18,7 +18,7 @@ export default async function*(
   })
 
   while (!ended && !error) {
-    const data = stream.read()
+    const data = (stream.read(): any)
     if (data) {
       yield data
     } else {
