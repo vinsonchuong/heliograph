@@ -1,4 +1,5 @@
 /* @flow */
+import { makeAsyncIterator } from 'heliograph/utilities'
 
 export default function<Item>(): AsyncIterator<Item> & {
   push: Item => void,
@@ -10,33 +11,25 @@ export default function<Item>(): AsyncIterator<Item> & {
   let error = null
   let ended = false
 
-  // $FlowFixMe
+  const iterator = makeAsyncIterator(async () => {
+    if (queue.length === 0 && !ended && !error) {
+      await new Promise(resolve => {
+        interrupt = resolve
+      })
+      interrupt = null
+    }
+
+    if (error) {
+      throw error
+    } else if (queue.length > 0) {
+      return { done: false, value: queue.shift() }
+    } else {
+      return { done: true }
+    }
+  })
+
   return {
-    // $FlowFixMe
-    [Symbol.asyncIterator]() {
-      return this
-    },
-
-    async next() {
-      if (queue.length === 0 && !ended && !error) {
-        await new Promise(resolve => {
-          interrupt = resolve
-        })
-        interrupt = null
-      }
-
-      if (error) {
-        throw error
-      }
-
-      if (queue.length > 0) {
-        return { done: false, value: queue.shift() }
-      }
-
-      if (ended) {
-        return { done: true }
-      }
-    },
+    ...iterator,
 
     push(value) {
       queue.push(value)

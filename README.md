@@ -121,3 +121,34 @@ async function run() {
 
 run()
 ```
+
+#### `zip(...iterators)`
+Pair up items from two async iterators
+
+```js
+import { promisify } from 'util'
+import { zip } from 'heliograph'
+
+const sleep = promisify(setTimeout)
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function* letters() {
+  yield 'a'
+  yield 'b'
+  yield 'c'
+}
+
+async function run() {
+  const iterator = zip(numbers(), letters())
+  for await (const [number, letter] of iterator) {
+    console.log(number, leter)
+  }
+}
+
+run()
+```
