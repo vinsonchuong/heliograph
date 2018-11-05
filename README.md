@@ -92,7 +92,7 @@ run()
 ### Operators
 
 #### `merge(...iterators)`
-Merge together multiple async iterators
+Interleave the items from multiple async iterators as they arrive
 
 ```js
 import { promisify } from 'util'
@@ -106,16 +106,16 @@ async function* numbers() {
   yield 3
 }
 
-async function* letters() {
-  yield 'a'
-  yield 'b'
-  yield 'c'
+async function* otherNumbers() {
+  yield 42
+  yield 43
+  yield 44
 }
 
 async function run() {
-  const iterator = merge(numbers(), letters())
-  for await (const { source, value } of iterator) {
-    console.log(source, value)
+  const iterator = merge(numbers(), otherNumbers())
+  for await (const number of iterator) {
+    console.log(number)
   }
 }
 

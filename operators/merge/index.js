@@ -1,15 +1,15 @@
 /* @flow */
 import { fromQueue } from 'heliograph'
 
-export default function<Item, Iterator: $AsyncIterator<Item, void, void>>(
-  ...iterators: Array<Iterator>
-): $AsyncIterator<{ source: Iterator, value: Item }, void, void> {
+export default function<Item>(
+  ...iterators: Array<$AsyncIterator<Item, void, void>>
+): $AsyncIterator<Item, void, void> {
   const queue = fromQueue()
   const finishedIterators = new Set()
 
   iterators.forEach(async iterator => {
     for await (const value of iterator) {
-      queue.push({ source: iterator, value })
+      queue.push(value)
     }
     finishedIterators.add(iterator)
 

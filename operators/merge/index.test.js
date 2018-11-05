@@ -14,39 +14,22 @@ test('merging async iterators', async t => {
     yield 3
   }
 
-  async function* letters() {
-    yield 'a'
+  async function* otherNumbers() {
+    yield 42
     await sleep(150)
-    yield 'b'
-    yield 'c'
+    yield 43
+    yield 44
   }
 
   const numbersIterator = numbers()
-  const lettersIterator = letters()
-  const iterator = merge(numbersIterator, lettersIterator)
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: lettersIterator, value: 'a' }
-  })
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: numbersIterator, value: 1 }
-  })
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: numbersIterator, value: 2 }
-  })
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: lettersIterator, value: 'b' }
-  })
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: lettersIterator, value: 'c' }
-  })
-  t.deepEqual(await iterator.next(), {
-    done: false,
-    value: { source: numbersIterator, value: 3 }
-  })
+  const otherNumbersIterator = otherNumbers()
+  const iterator = merge(numbersIterator, otherNumbersIterator)
+
+  t.deepEqual(await iterator.next(), { done: false, value: 42 })
+  t.deepEqual(await iterator.next(), { done: false, value: 1 })
+  t.deepEqual(await iterator.next(), { done: false, value: 2 })
+  t.deepEqual(await iterator.next(), { done: false, value: 43 })
+  t.deepEqual(await iterator.next(), { done: false, value: 44 })
+  t.deepEqual(await iterator.next(), { done: false, value: 3 })
   t.deepEqual(await iterator.next(), { done: true })
 })
