@@ -2,9 +2,9 @@
 import { makeAsyncIterator } from 'heliograph/utilities'
 
 export default function<Item1, Item2>(
-  iterator1: $AsyncIterator<Item1, void, void>,
-  iterator2: $AsyncIterator<Item2, void, void>
-): $AsyncIterator<[Item1, Item2], void, void> {
+  iterator1: AsyncIterator<Item1>,
+  iterator2: AsyncIterator<Item2>
+): AsyncIterator<[Item1, Item2]> {
   return makeAsyncIterator(async () => {
     const item1 = await iterator1.next()
     const item2 = await iterator2.next()

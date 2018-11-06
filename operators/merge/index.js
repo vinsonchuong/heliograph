@@ -2,8 +2,8 @@
 import { fromQueue } from 'heliograph'
 
 export default function<Item>(
-  ...iterators: Array<$AsyncIterator<Item, void, void>>
-): $AsyncIterator<Item, void, void> {
+  ...iterators: Array<AsyncIterator<Item>>
+): AsyncIterator<Item> {
   const queue = fromQueue()
   const finishedIterators = new Set()
 

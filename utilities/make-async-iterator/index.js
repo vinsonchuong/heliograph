@@ -1,11 +1,13 @@
 /* @flow */
 
 export default function<Item>(
-  next: () => Promise<{ done: true } | { done: false, value: Item }>
-): $AsyncIterator<Item, void, void> {
-  /* $FlowFixMe */
+  next: () => Promise<
+    { done: true, value?: empty } | { done: false, value: Item }
+  >
+): AsyncIterator<Item> {
+  // $FlowFixMe
   return {
-    /* $FlowFixMe */
+    // $FlowFixMe
     [Symbol.asyncIterator]() {
       return this
     },
