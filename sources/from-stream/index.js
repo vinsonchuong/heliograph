@@ -4,7 +4,7 @@ import type { Readable } from 'stream'
 
 export default async function* /*:: <Item> */ ( /* eslint-disable-line */
   stream: Readable
-): AsyncGenerator<Item, void, void> {
+): AsyncIterator<Item> {
   stream.pause()
 
   let ended = false

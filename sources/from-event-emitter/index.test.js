@@ -5,7 +5,7 @@ import fromEventEmitter from './'
 
 test('queueing up events', async t => {
   const eventEmitter = new EventEmitter()
-  const iterator = fromEventEmitter(eventEmitter, 'message')
+  const iterator = fromEventEmitter<number>(eventEmitter, 'message')
 
   eventEmitter.emit('message', 1)
   eventEmitter.emit('message', 2)
