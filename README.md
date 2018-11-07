@@ -91,6 +91,28 @@ run()
 
 ### Operators
 
+#### `filter(include, iterator)`
+Return a new async iterator whose items are items from the given iterator that
+evaluate to `true` when passed to the given inclusion function.
+
+```js
+import { map } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function run() {
+  const iterator = filter(n => n % 2 === 0, numbers())
+  for await (const evenNumber of iterator) {
+    console.log(evenNumber)
+  }
+}
+run()
+```
+
 #### `map(transform, iterator)`
 Return a new async iterator whose items are the result of transforming each item
 of the given async iterator.
