@@ -91,6 +91,28 @@ run()
 
 ### Operators
 
+#### `map(transform, iterator)`
+Return a new async iterator whose items are the result of transforming each item
+of the given async iterator.
+
+```js
+import { map } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function run() {
+  const iterator = map(n => n * 2, numbers())
+  for await (const doubledNumber of iterator) {
+    console.log(doubledNumber)
+  }
+}
+run()
+```
+
 #### `merge(...iterators)`
 Interleave the items from multiple async iterators as they arrive
 
