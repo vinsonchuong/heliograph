@@ -122,7 +122,7 @@ async function run() {
 run()
 ```
 
-#### `zip(...iterators)`
+#### `zip(iterator1, iterator2)`
 Pair up items from two async iterators
 
 ```js
