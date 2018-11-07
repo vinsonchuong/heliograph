@@ -1,5 +1,6 @@
 /* @flow */
 import test from 'ava'
+import { fromQueue } from 'heliograph'
 import zip from './'
 
 test('grouping together items from multiple iterators', async t => {
@@ -20,5 +21,61 @@ test('grouping together items from multiple iterators', async t => {
   t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
   t.deepEqual(await iterator.next(), { done: false, value: [2, 'b'] })
   t.deepEqual(await iterator.next(), { done: false, value: [3, 'c'] })
+  t.deepEqual(await iterator.next(), { done: true })
+})
+
+test('ending when the first iterator ends without emitting any items', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  one.end()
+  two.push('a')
+
+  t.deepEqual(await iterator.next(), { done: true })
+})
+
+test('ending when the second iterator ends without emitting any items', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  one.push(1)
+  two.end()
+
+  t.deepEqual(await iterator.next(), { done: true })
+})
+
+test('ending when the first iterator ends', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  one.push(1)
+  one.end()
+
+  two.push('a')
+  two.push('b')
+
+  t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
+  t.deepEqual(await iterator.next(), { done: true })
+})
+
+test('ending when the second iterator ends', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  one.push(1)
+  one.push(2)
+
+  two.push('a')
+  two.end()
+
+  t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
   t.deepEqual(await iterator.next(), { done: true })
 })
