@@ -91,12 +91,12 @@ run()
 
 ### Operators
 
-#### `filter(include, iterator)`
+#### `filter(include)(iterator)`
 Return a new async iterator whose items are items from the given iterator that
 evaluate to `true` when passed to the given inclusion function.
 
 ```js
-import { map } from 'heliograph'
+import { filter } from 'heliograph'
 
 async function* numbers() {
   yield 1
@@ -105,7 +105,7 @@ async function* numbers() {
 }
 
 async function run() {
-  const iterator = filter(n => n % 2 === 0, numbers())
+  const iterator = filter(n => n % 2 === 0)(numbers())
   for await (const evenNumber of iterator) {
     console.log(evenNumber)
   }
@@ -113,7 +113,7 @@ async function run() {
 run()
 ```
 
-#### `map(transform, iterator)`
+#### `map(transform)(iterator)`
 Return a new async iterator whose items are the result of transforming each item
 of the given async iterator.
 
@@ -127,7 +127,7 @@ async function* numbers() {
 }
 
 async function run() {
-  const iterator = map(n => n * 2, numbers())
+  const iterator = map(n => n * 2)(numbers())
   for await (const doubledNumber of iterator) {
     console.log(doubledNumber)
   }
@@ -158,6 +158,34 @@ async function* otherNumbers() {
 
 async function run() {
   const iterator = merge(numbers(), otherNumbers())
+  for await (const number of iterator) {
+    console.log(number)
+  }
+}
+
+run()
+```
+
+### `pipe(iterator, ...transforms)`
+Pass an iterator through a series of transforms.
+
+```js
+import { pipe, map, filter } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+  yield 4
+}
+
+async function run() {
+  const iterator = pipe(
+    numbers(),
+    filter(number => number % 2 === 0),
+    map(evenNumber => evenNumber * 3)
+  )
+
   for await (const number of iterator) {
     console.log(number)
   }

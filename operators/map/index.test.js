@@ -9,7 +9,7 @@ test('transforming each element of an iterator', async t => {
     yield 3
   }
 
-  const iterator = map(n => 2 * n, numbers())
+  const iterator = map(n => 2 * n)(numbers())
 
   t.deepEqual(await iterator.next(), { done: false, value: 2 })
   t.deepEqual(await iterator.next(), { done: false, value: 4 })

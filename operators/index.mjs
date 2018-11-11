@@ -1,9 +1,12 @@
+import mergeModule from './merge'
+import pipeModule from './pipe'
+import zipModule from './zip'
 import filterModule from './filter'
 import mapModule from './map'
-import mergeModule from './merge'
-import zipModule from './zip'
+
+export const merge = mergeModule.default
+export const pipe = pipeModule.default
+export const zip = zipModule.default
 
 export const filter = filterModule.default
 export const map = mapModule.default
-export const merge = mergeModule.default
-export const zip = zipModule.default
