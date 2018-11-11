@@ -28,14 +28,16 @@ test('consuming and waiting for values from a queue', async t => {
 })
 
 test('pushing errors', async t => {
-  t.plan(1)
+  t.plan(2)
 
   const queue = fromQueue()
 
   await sleep(100)
+  queue.push(1)
   queue.pushError(new Error('Something went wrong'))
 
   async function consume() {
+    t.deepEqual(await queue.next(), { done: false, value: 1 })
     await t.throwsAsync(queue.next(), 'Something went wrong')
   }
   await consume()

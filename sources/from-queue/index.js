@@ -19,10 +19,10 @@ export default function<Item>(): AsyncIterator<Item> & {
       interrupt = null
     }
 
-    if (error) {
-      throw error
-    } else if (queue.length > 0) {
+    if (queue.length > 0) {
       return { done: false, value: queue.shift() }
+    } else if (error) {
+      throw error
     } else {
       return { done: true }
     }
