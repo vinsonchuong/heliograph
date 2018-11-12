@@ -12,5 +12,5 @@ export const pipe = pipeModule.default
 export const zip = zipModule.default
 
 export const filter = filterModule.default
-export const forEach = forEach.default
+export const forEach = forEachModule.default
 export const map = mapModule.default
