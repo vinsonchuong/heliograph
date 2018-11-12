@@ -133,11 +133,11 @@ async function run() {
 run()
 ```
 
-#### `forEach(iterator)(processItem)`
-Iterate over the items of an async iterator
+#### `observe(iterator)(processItem)`
+Observe the items of an async iterator without consuming them
 
 ```js
-import { pipe, forEach } from 'heliograph'
+import { pipe, observe } from 'heliograph'
 
 async function* numbers() {
   yield 1
@@ -145,10 +145,14 @@ async function* numbers() {
   yield 3
 }
 
-pipe(
+const iterator = pipe(
   numbers(),
-  forEach(n => console.log(n))
+  observe(n => console.log(n))
 )
+
+for await (const number of iterator) {
+  console.log(number)
+}
 ```
 
 #### `map(transform)(iterator)`
