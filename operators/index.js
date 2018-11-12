@@ -1,4 +1,5 @@
 /* @flow */
+export { default as fork } from './fork'
 export { default as merge } from './merge'
 export { default as pipe } from './pipe'
 export { default as zip } from './zip'

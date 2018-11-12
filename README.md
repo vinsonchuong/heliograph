@@ -113,6 +113,26 @@ async function run() {
 run()
 ```
 
+#### `fork(iterator, times)`
+Copy an async iterator so that separate operators can be applied
+
+```js
+import { fork, filter } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function run() {
+  const [numbers1, numbers2] = fork(numbers(), 2)
+  const evenNumbers = filter(n => n % 2 === 0)(numbers1)
+  const oddNumbers = filter(n => n % 2 !== 0)(numbers2)
+}
+run()
+```
+
 #### `map(transform)(iterator)`
 Return a new async iterator whose items are the result of transforming each item
 of the given async iterator.
