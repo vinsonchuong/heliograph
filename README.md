@@ -133,6 +133,24 @@ async function run() {
 run()
 ```
 
+#### `forEach(iterator)(processItem)`
+Iterate over the items of an async iterator
+
+```js
+import { pipe, forEach } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+pipe(
+  numbers(),
+  forEach(n => console.log(n))
+)
+```
+
 #### `map(transform)(iterator)`
 Return a new async iterator whose items are the result of transforming each item
 of the given async iterator.
