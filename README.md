@@ -91,6 +91,28 @@ run()
 
 ### Operators
 
+#### `consume(iterator)(processItem)`
+Consume the items of the given async iterator
+
+```js
+import { pipe, consume } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function run() {
+  await pipe(
+    numbers(),
+    consume(n => console.log(n))
+  )
+}
+
+run()
+```
+
 #### `filter(include)(iterator)`
 Return a new async iterator whose items are items from the given iterator that
 evaluate to `true` when passed to the given inclusion function.
@@ -131,28 +153,6 @@ async function run() {
   const oddNumbers = filter(n => n % 2 !== 0)(numbers2)
 }
 run()
-```
-
-#### `observe(iterator)(processItem)`
-Observe the items of an async iterator without consuming them
-
-```js
-import { pipe, observe } from 'heliograph'
-
-async function* numbers() {
-  yield 1
-  yield 2
-  yield 3
-}
-
-const iterator = pipe(
-  numbers(),
-  observe(n => console.log(n))
-)
-
-for await (const number of iterator) {
-  console.log(number)
-}
 ```
 
 #### `map(transform)(iterator)`
@@ -206,6 +206,34 @@ async function run() {
 }
 
 run()
+```
+
+#### `observe(iterator)(processItem)`
+Observe the items of an async iterator and return a new async iterator that
+yields the same items.
+
+```js
+import { pipe, observe } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+const iterator = pipe(
+  numbers(),
+  observe(n => console.log(n))
+)
+
+async function run() {
+  for await (const number of iterator) {
+    console.log(number)
+  }
+}
+
+run()
+
 ```
 
 ### `pipe(iterator, ...transforms)`
