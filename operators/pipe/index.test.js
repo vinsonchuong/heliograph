@@ -22,3 +22,18 @@ test('piping an iterator into a series of operators', async t => {
   t.deepEqual(await iterator.next(), { done: false, value: 15 })
   t.deepEqual(await iterator.next(), { done: true, value: undefined })
 })
+
+test('propagating errors', async t => {
+  async function* numbers() {
+    yield 1
+  }
+
+  const iterator = pipe(
+    numbers(),
+    map(() => {
+      throw new Error()
+    })
+  )
+
+  await t.throwsAsync(iterator.next())
+})

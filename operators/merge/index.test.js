@@ -21,9 +21,7 @@ test('merging async iterators', async t => {
     yield 44
   }
 
-  const numbersIterator = numbers()
-  const otherNumbersIterator = otherNumbers()
-  const iterator = merge(numbersIterator, otherNumbersIterator)
+  const iterator = merge(numbers(), otherNumbers())
 
   t.deepEqual(await iterator.next(), { done: false, value: 42 })
   t.deepEqual(await iterator.next(), { done: false, value: 1 })
@@ -32,4 +30,18 @@ test('merging async iterators', async t => {
   t.deepEqual(await iterator.next(), { done: false, value: 44 })
   t.deepEqual(await iterator.next(), { done: false, value: 3 })
   t.deepEqual(await iterator.next(), { done: true })
+})
+
+test('propagating errors', async t => {
+  async function* numbers() {
+    await sleep(100)
+    yield 1
+  }
+
+  async function* error() {
+    throw new Error('Something Wrong')
+  }
+
+  const iterator = merge(numbers(), error())
+  await t.throwsAsync(iterator.next(), 'Something Wrong')
 })
