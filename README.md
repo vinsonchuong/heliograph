@@ -233,7 +233,7 @@ run()
 
 #### `observe(iterator)(processItem)`
 Observe the items of an async iterator and return a new async iterator that
-yields the same items.
+yields the same items. Errors are not passed to the observer.
 
 ```js
 import { pipe, observe } from 'heliograph'
