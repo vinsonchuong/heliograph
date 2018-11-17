@@ -133,6 +133,9 @@ async function run() {
 run()
 ```
 
+`consume` returns a promise that resolves when the iterator ends and rejects
+if it throws an error.
+
 #### `filter(include)(iterator)`
 Return a new async iterator whose items are items from the given iterator that
 evaluate to `true` when passed to the given inclusion function.
