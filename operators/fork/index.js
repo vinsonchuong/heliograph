@@ -10,14 +10,20 @@ export default function<Item>(
     .map(fromQueue)
 
   async function copyItems() {
-    for await (const item of iterator) {
-      for (const copiedIterator of copiedIterators) {
-        copiedIterator.push(item)
+    try {
+      for await (const item of iterator) {
+        for (const copiedIterator of copiedIterators) {
+          copiedIterator.push(item)
+        }
       }
-    }
 
-    for (const copiedIterator of copiedIterators) {
-      copiedIterator.end()
+      for (const copiedIterator of copiedIterators) {
+        copiedIterator.end()
+      }
+    } catch (error) {
+      for (const copiedIterator of copiedIterators) {
+        copiedIterator.pushError(error)
+      }
     }
   }
   copyItems()
