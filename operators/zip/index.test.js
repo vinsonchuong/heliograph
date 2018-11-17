@@ -79,3 +79,25 @@ test('ending when the second iterator ends', async t => {
   t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
   t.deepEqual(await iterator.next(), { done: true })
 })
+
+test('propagating errors thrown by the first iterator', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  one.pushError(new Error('Something Wrong'))
+
+  await t.throwsAsync(iterator.next(), 'Something Wrong')
+})
+
+test('propagating errors thrown by the second iterator', async t => {
+  const one = fromQueue()
+  const two = fromQueue()
+
+  const iterator = zip(one, two)
+
+  two.pushError(new Error('Something Wrong'))
+
+  await t.throwsAsync(iterator.next(), 'Something Wrong')
+})

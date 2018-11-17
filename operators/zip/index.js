@@ -10,14 +10,22 @@ export default function<Item1, Item2>(
     const promise2 = iterator2.next()
 
     return Promise.race([
-      new Promise(async resolve => {
-        const { done } = await promise1
-        if (done) resolve({ done: true })
+      new Promise(async (resolve, reject) => {
+        try {
+          const { done } = await promise1
+          if (done) resolve({ done: true })
+        } catch (error) {
+          reject(error)
+        }
       }),
 
-      new Promise(async resolve => {
-        const { done } = await promise2
-        if (done) resolve({ done: true })
+      new Promise(async (resolve, reject) => {
+        try {
+          const { done } = await promise2
+          if (done) resolve({ done: true })
+        } catch (error) {
+          reject(error)
+        }
       }),
 
       (async function() {
