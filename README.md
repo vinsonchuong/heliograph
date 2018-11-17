@@ -58,7 +58,7 @@ Signal an error condition by calling `.push(error)`. Any values in the queue
 will be drained first. Subsequent attempts to pull values will throw the given
 error.
 
-#### `fromEventEmitter()`
+#### `fromEventEmitter(eventEmitter, messageEventName, ?endEventName, ?errorEventName)`
 Creates an async iterator that queues up events from an `EventEmitter`.
 
 ```js
@@ -67,11 +67,14 @@ import { fromEventEmitter } from 'heliograph'
 
 async function run() {
   const eventEmitter = new EventEmitter()
-  const iterator = fromEventEmitter(eventEmitter, 'message')
+  const iterator = fromEventEmitter(eventEmitter, 'message', 'end', 'error')
 
   eventEmitter.emit('message', 1)
   eventEmitter.emit('message', 2)
   eventEmitter.emit('message', 3)
+  eventEmitter.emit('end')
+
+  // eventEmitter.emit('error', new Error('Something Wrong'))
 
   for await (const message of iterator) {
     console.log(message)
@@ -80,6 +83,11 @@ async function run() {
 
 run()
 ```
+
+With semantics similar to [`fromQueue()`](#fromqueue), whenever a message event
+is emitted, its value is enqueued. Optionally, an end event or error event can
+be provided; when emitted, they are translated into calls to `.end()` and
+`.pushError(error)`, respectively.
 
 #### `fromStream(readableStream)`
 Creates an async iterator that pulls values from a Readable Stream.
