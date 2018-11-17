@@ -106,6 +106,9 @@ async function run() {
 run()
 ```
 
+When the stream ends, the async interator will end. When the stream emits an
+error, the async iterator will throw that error.
+
 ### Operators
 
 #### `consume(iterator)(processItem)`
