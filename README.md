@@ -49,6 +49,15 @@ produce()
 consume()
 ```
 
+Push values into the queue using `.push(value)`. Values are buffered until they
+are pulled out by a consumer. Signal to consumers that no more values will be
+produced by calling `.end()`; any values still in the queue will be drained
+first.
+
+Signal an error condition by calling `.push(error)`. Any values in the queue
+will be drained first. Subsequent attempts to pull values will throw the given
+error.
+
 #### `fromEventEmitter()`
 Creates an async iterator that queues up events from an `EventEmitter`.
 
