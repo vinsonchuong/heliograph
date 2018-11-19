@@ -2,7 +2,7 @@
 
 type AsyncIteratorDefinition<Value> = {
   next: () => Promise<
-    { done: false, value: Value } | { done: true, value?: empty }
+    $ReadOnly<{ done: false, value: Value } | { done: true, value?: empty }>
   >
 }
 
