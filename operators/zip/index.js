@@ -1,43 +1,45 @@
 /* @flow */
-import { makeAsyncIterator } from 'heliograph/utilities'
+import { makeAsyncIterator } from 'heliograph'
 
 export default function<Item1, Item2>(
   iterator1: AsyncIterator<Item1>,
   iterator2: AsyncIterator<Item2>
 ): AsyncIterator<[Item1, Item2]> {
-  return makeAsyncIterator(() => {
-    const promise1 = iterator1.next()
-    const promise2 = iterator2.next()
+  return makeAsyncIterator({
+    async next() {
+      const promise1 = iterator1.next()
+      const promise2 = iterator2.next()
 
-    return Promise.race([
-      new Promise(async (resolve, reject) => {
-        try {
-          const { done } = await promise1
-          if (done) resolve({ done: true })
-        } catch (error) {
-          reject(error)
-        }
-      }),
+      return Promise.race([
+        new Promise(async (resolve, reject) => {
+          try {
+            const { done } = await promise1
+            if (done) resolve({ done: true })
+          } catch (error) {
+            reject(error)
+          }
+        }),
 
-      new Promise(async (resolve, reject) => {
-        try {
-          const { done } = await promise2
-          if (done) resolve({ done: true })
-        } catch (error) {
-          reject(error)
-        }
-      }),
+        new Promise(async (resolve, reject) => {
+          try {
+            const { done } = await promise2
+            if (done) resolve({ done: true })
+          } catch (error) {
+            reject(error)
+          }
+        }),
 
-      (async function() {
-        const item1 = await promise1
-        const item2 = await promise2
+        (async function() {
+          const item1 = await promise1
+          const item2 = await promise2
 
-        if (item1.value && item2.value) {
-          return { done: false, value: [item1.value, item2.value] }
-        } else {
-          return { done: true }
-        }
-      })()
-    ])
+          if (item1.value && item2.value) {
+            return { done: false, value: [item1.value, item2.value] }
+          } else {
+            return { done: true }
+          }
+        })()
+      ])
+    }
   })
 }

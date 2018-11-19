@@ -16,6 +16,44 @@ yarn add heliograph
 
 ### Sources
 
+#### `makeAsyncIterator({ next, ...otherProperties })`
+Manually define an async iterator
+
+```js
+import { makeAsyncIterator } from 'heliograph'
+
+async function run() {
+  let currentCount = 1
+  const iterator = makeAsyncIterator({
+    async next() {
+      if (currentCount <= 3) {
+        return { done: false, value: currentCount++ }
+      } else {
+        return { done: true }
+      }
+    },
+
+    doSomethingElse() {
+      console.log('Hello There')
+    }
+  })
+
+  for await (const value of iterator) {
+    console.log(value)
+  }
+
+  iterator.doSomethingElse()
+}
+
+run()
+```
+
+`.next()` is called whenever a consumer wants to pull the next value from the
+iterator; it must return either `{ done: false, value: 'VALUE' }` or
+`{ done: true }`.
+
+Other properties that are passed in will be added to the returned iterator.
+
 #### `fromQueue()`
 Creates an async iterator that waits for and pulls values pushed into a queue
 
