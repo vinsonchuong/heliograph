@@ -18,13 +18,13 @@
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "ava": "^1.0.0-beta.8",
+    "ava": "^1.0.0-rc.2",
     "build-esm": "^4.2.0",
-    "flow-bin": "^0.83.0",
+    "flow-bin": "^0.86.0",
     "flow-typed": "^2.5.1",
     "into-stream": "^4.0.0",
-    "overdub": "^2.2.0",
-    "semantic-release": "^15.10.5",
+    "overdub": "^2.2.1",
+    "semantic-release": "^15.12.1",
     "standard-esnext": "^5.1.8"
   },
   "ava": {
