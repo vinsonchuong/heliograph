@@ -147,7 +147,7 @@ run()
 When the stream ends, the async interator will end. When the stream emits an
 error, the async iterator will throw that error.
 
-### Operators
+### Sinks
 
 #### `consume(iterator)(processItem)`
 Consume the items of the given async iterator
@@ -173,6 +173,8 @@ run()
 
 `consume` returns a promise that resolves when the iterator ends and rejects
 if it throws an error.
+
+### Operators
 
 #### `filter(include)(iterator)`
 Return a new async iterator whose items are items from the given iterator that

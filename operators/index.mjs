@@ -7,7 +7,6 @@ import filterModule from './filter'
 import mapModule from './map'
 import observeModule from './observe'
 
-export const consume = consumeModule.default
 export const fork = forkModule.default
 export const merge = mergeModule.default
 export const pipe = pipeModule.default
