@@ -174,6 +174,30 @@ run()
 `consume` returns a promise that resolves when the iterator ends and rejects
 if it throws an error.
 
+#### `toArray(iterator)`
+Collect the items of the given async iterator into an array
+
+```js
+import { pipe, toArray } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+async function run() {
+  const numbersArray = await pipe(
+    numbers(),
+    toArray
+  )
+
+  console.log(numbersArray)
+}
+
+run()
+```
+
 ### Operators
 
 #### `filter(include)(iterator)`
