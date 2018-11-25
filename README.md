@@ -149,7 +149,7 @@ error, the async iterator will throw that error.
 
 ### Sinks
 
-#### `consume(iterator)(processItem)`
+#### `consume(processItem)(iterator)`
 Consume the items of the given async iterator
 
 ```js
