@@ -1,4 +1,3 @@
-import consumeModule from './consume'
 import forkModule from './fork'
 import mergeModule from './merge'
 import pipeModule from './pipe'
