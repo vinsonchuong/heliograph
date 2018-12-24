@@ -54,6 +54,29 @@ iterator; it must return either `{ done: false, value: 'VALUE' }` or
 
 Other properties that are passed in will be added to the returned iterator.
 
+#### `fromClock(interval)`
+Creates an async iterator that ticks after every interval.
+
+```js
+import { fromClock } from 'heliograph'
+
+async function run() {
+  for await(const hour of fromClock(1000 * 60 * 60)) {
+    console.log(hour)
+  }
+}
+
+run()
+```
+
+For example, when set to tick every hour (an interval of `1000 * 60 * 60`),
+ticks will be emitted every hour on the hour starting with the next nearest
+hour. So, if the current time is 10:30, the first tick will be at 11:00 and
+then at 12:00.
+
+Values cannot be emitted exactly on time but are guaranteed not to be emitted
+early. From testing, the longest delay seen has been 10ms.
+
 #### `fromQueue()`
 Creates an async iterator that waits for and pulls values pushed into a queue
 
