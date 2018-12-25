@@ -342,7 +342,7 @@ async function run() {
 run()
 ```
 
-#### `observe(iterator)(processItem)`
+#### `observe(processItem)(iterator)`
 Observe the items of an async iterator and return a new async iterator that
 yields the same items. Errors are not passed to the observer.
 
@@ -370,7 +370,33 @@ run()
 
 ```
 
-### `pipe(iterator, ...transforms)`
+#### `partition(predicate)(iterator)`
+Break up an iterator's items into a series of groups
+
+```js
+import { partition } from 'heliograph'
+
+async function* streamItems() {
+  yield { group: 1 }
+  yield { group: 1 }
+  yield { group: 2 }
+  yield { group: 3 }
+  yield { group: 3 }
+  yield { group: 3 }
+}
+
+async function run() {
+  const groups = partition((x, y) => x.group !== y.group)(streamItems())
+
+  for await (const group of groups) {
+    console.log(group)
+  }
+}
+
+run()
+```
+
+#### `pipe(iterator, ...transforms)`
 Pass an iterator through a series of transforms.
 
 ```js
