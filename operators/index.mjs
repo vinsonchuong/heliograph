@@ -6,6 +6,7 @@ import filterModule from './filter'
 import mapModule from './map'
 import observeModule from './observe'
 import partitionModule from './partition'
+import scanModule from './scan'
 
 export const fork = forkModule.default
 export const merge = mergeModule.default
@@ -16,3 +17,4 @@ export const filter = filterModule.default
 export const map = mapModule.default
 export const observe = observeModule.default
 export const partition = partitionModule.default
+export const scan = scanModule.default

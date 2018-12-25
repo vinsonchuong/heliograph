@@ -424,6 +424,34 @@ async function run() {
 run()
 ```
 
+#### `scan(windowSize, transform)(iterator)`
+Compute values from a rolling window
+
+```js
+import { scan } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+  yield 4
+  yield 5
+}
+
+async function run() {
+  const addedNumbers = scan(3, (x, y, z) => x + y + z)(numbers())
+
+  for await (const addedNumber of addedNumbers) {
+    console.log(addedNumber)
+  }
+}
+
+run()
+```
+
+Note that for a given `windowSize`, the first `windowSize - 1` items emitted
+will be `null`.
+
 #### `zip(iterator1, iterator2)`
 Pair up items from two async iterators
 
