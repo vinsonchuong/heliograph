@@ -170,6 +170,30 @@ run()
 When the stream ends, the async interator will end. When the stream emits an
 error, the async iterator will throw that error.
 
+#### `fromWebSocket(url)`
+Creates an async iterator that connects to the given URL and emits incoming
+messages.
+
+```
+import { fromWebSocket } from 'heliograph'
+
+async function run() {
+  const socket = await fromWebSocket('wss://echo.websocket.org/')
+
+  await socket.send('One')
+  await socket.send('Two')
+  await socket.close()
+
+  for await (const message of socket) {
+    console.log(message)
+  }
+}
+
+run()
+```
+
+The iterator will end when either the client or server disconnects.
+
 ### Sinks
 
 #### `consume(processItem)(iterator)`

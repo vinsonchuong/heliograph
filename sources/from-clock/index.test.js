@@ -1,13 +1,13 @@
-// @flow
+/* @flow */
 import test from 'ava'
-import clock from './'
+import fromClock from './'
 
 test('ticking at the given interval length', async t => {
   const interval = 1 * 1000
 
   let iterations = 3
 
-  for await (const tick of clock(interval)) {
+  for await (const tick of fromClock(interval)) {
     t.is(tick.valueOf() % interval, 0)
     t.true(Date.now() >= tick.valueOf())
     t.true(Date.now() - tick.valueOf() < 10)
