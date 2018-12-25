@@ -1,4 +1,4 @@
-/* eslint-disable no-unmodified-loop-condition */
+/* eslint-disable no-unmodified-loop-condition, flowtype/no-weak-types */
 /* @flow */
 import type { Readable } from 'stream'
 

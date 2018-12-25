@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable flowtype/no-weak-types */
 import { flow } from 'lodash'
 
 type Pipe = (<Arg, Fn: Function>(Arg, Fn: Function) => $Call<Fn, Arg>) &

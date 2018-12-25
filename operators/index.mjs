@@ -1,3 +1,4 @@
+import concatModule from './concat'
 import forkModule from './fork'
 import mergeModule from './merge'
 import pipeModule from './pipe'
@@ -8,6 +9,7 @@ import observeModule from './observe'
 import partitionModule from './partition'
 import scanModule from './scan'
 
+export const concat = concatModule.default
 export const fork = forkModule.default
 export const merge = mergeModule.default
 export const pipe = pipeModule.default

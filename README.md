@@ -247,6 +247,35 @@ run()
 
 ### Operators
 
+
+#### `concat(...iterators)`
+Return a new async iterator that emits all of the items of the first given
+iterator, followed by all of the items of the next, etc.
+
+```js
+import { concat } from 'heliograph'
+
+async function* numbersA() {
+  yield 1
+  yield 2
+}
+
+async function* numbersB() {
+  yield 1
+  yield 2
+}
+
+async function run() {
+  const allNumbers = concat(numbersA(), numbersB())
+
+  for await (const number of allNumbers) {
+    console.log(number)
+  }
+}
+
+run()
+```
+
 #### `filter(include)(iterator)`
 Return a new async iterator whose items are items from the given iterator that
 evaluate to `true` when passed to the given inclusion function.
