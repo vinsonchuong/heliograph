@@ -174,7 +174,7 @@ error, the async iterator will throw that error.
 Creates an async iterator that connects to the given URL and emits incoming
 messages.
 
-```
+```js
 import { fromWebSocket } from 'heliograph'
 
 async function run() {
