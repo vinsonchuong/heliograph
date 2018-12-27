@@ -28,7 +28,7 @@
     "flow-typed": "^2.5.1",
     "into-stream": "^4.0.0",
     "overdub": "^2.2.1",
-    "semantic-release": "^15.13.1",
+    "semantic-release": "^15.13.2",
     "standard-esnext": "^5.1.8"
   },
   "ava": {
