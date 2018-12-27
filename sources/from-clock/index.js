@@ -1,7 +1,5 @@
 /* @flow */
-import { promisify } from 'util'
-
-const sleep = promisify(setTimeout)
+import { sleep } from 'heliograph/util'
 
 export default async function* fromClock(
   interval: number

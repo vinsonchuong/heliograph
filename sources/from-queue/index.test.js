@@ -1,9 +1,7 @@
 /* @flow */
 import test from 'ava'
-import { promisify } from 'util'
+import { sleep } from 'heliograph/util'
 import { fromQueue } from 'heliograph'
-
-const sleep = promisify(setTimeout)
 
 test('consuming and waiting for values from a queue', async t => {
   t.plan(4)

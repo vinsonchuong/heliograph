@@ -1,6 +1,6 @@
 /* @flow */
 import WebSocket from 'isomorphic-ws'
-import { promisify } from 'util'
+import pify from 'pify'
 import { parse as parseUrl } from 'url'
 import pEvent from 'p-event'
 import { makeAsyncIterator } from 'heliograph'
@@ -25,7 +25,7 @@ export default async function<OutgoingMessage, IncomingMessage>(
 
   return makeAsyncIterator({
     next: () => iterator.next(),
-    send: promisify(ws.send.bind(ws)),
+    send: pify(ws.send.bind(ws)),
     close: async () => {
       ws.close()
       await pEvent(ws, 'close')

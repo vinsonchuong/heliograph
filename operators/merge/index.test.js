@@ -1,9 +1,7 @@
 /* @flow */
 import test from 'ava'
-import { promisify } from 'util'
+import { sleep } from 'heliograph/util'
 import merge from './'
-
-const sleep = promisify(setTimeout)
 
 test('merging async iterators', async t => {
   async function* numbers() {
