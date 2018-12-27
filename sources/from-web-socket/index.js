@@ -13,9 +13,13 @@ export default async function<OutgoingMessage, IncomingMessage>(
     close: () => Promise<void>
   }
 > {
-  const ws = new WebSocket(url, {
-    rejectUnauthorized: parseUrl(url).hostname !== 'localhost'
-  })
+  const ws =
+    typeof window === 'undefined'
+      ? new WebSocket(url, {
+          rejectUnauthorized: parseUrl(url).hostname !== 'localhost'
+        })
+      : new WebSocket(url)
+
   await pEvent(ws, 'open')
 
   const iterator = pEvent.iterator(ws, 'message', {
