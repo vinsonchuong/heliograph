@@ -1,7 +1,5 @@
 /* @flow */
 import WebSocket from 'isomorphic-ws'
-import pify from 'pify'
-import { parse as parseUrl } from 'url'
 import pEvent from 'p-event'
 import { makeAsyncIterator } from 'heliograph'
 
@@ -13,9 +11,7 @@ export default async function<OutgoingMessage, IncomingMessage>(
     close: () => Promise<void>
   }
 > {
-  const ws = new WebSocket(url, {
-    rejectUnauthorized: parseUrl(url).hostname !== 'localhost'
-  })
+  const ws = new WebSocket(url)
 
   await pEvent(ws, 'open')
 
@@ -26,7 +22,7 @@ export default async function<OutgoingMessage, IncomingMessage>(
 
   return makeAsyncIterator({
     next: () => iterator.next(),
-    send: pify(ws.send.bind(ws)),
+    send: (...args) => ws.send(...args),
     close: async () => {
       ws.close()
       await pEvent(ws, 'close')
