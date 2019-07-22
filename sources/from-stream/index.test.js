@@ -4,7 +4,7 @@ import intoStream from 'into-stream'
 import { fromStream } from 'heliograph'
 
 test('converting a stream to an async iterator', async t => {
-  const stream = intoStream.obj([
+  const stream = intoStream.object([
     { word: 'foo' },
     { word: 'bar' },
     { word: 'baz' }

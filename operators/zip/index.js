@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable no-async-promise-executor */
 import { makeAsyncIterator } from 'heliograph'
 
 export default function<Item1, Item2>(

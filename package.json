@@ -19,20 +19,20 @@
   },
   "dependencies": {
     "isomorphic-ws": "^4.0.1",
-    "lodash": "^4.17.11",
-    "p-event": "^2.1.0",
+    "lodash": "^4.17.15",
+    "p-event": "^4.1.0",
     "pify": "^4.0.1",
-    "ws": "^6.1.2"
+    "ws": "^7.1.1"
   },
   "devDependencies": {
-    "ava": "^1.0.1",
-    "build-esm": "^4.2.0",
-    "flow-bin": "^0.89.0",
-    "flow-typed": "^2.5.1",
-    "into-stream": "^4.0.0",
-    "overdub": "^2.2.1",
-    "semantic-release": "^15.13.2",
-    "standard-esnext": "^5.1.8"
+    "ava": "^2.2.0",
+    "build-esm": "^4.2.1",
+    "flow-bin": "^0.103.0",
+    "flow-typed": "^2.6.0",
+    "into-stream": "^5.1.0",
+    "overdub": "^2.3.2",
+    "semantic-release": "^15.13.18",
+    "standard-esnext": "^5.3.1"
   },
   "ava": {
     "require": "overdub/register",
