@@ -32,7 +32,7 @@
     "into-stream": "^5.1.0",
     "overdub": "^2.3.2",
     "semantic-release": "^15.13.18",
-    "standard-esnext": "^5.3.1"
+    "standard-esnext": "^5.3.2"
   },
   "ava": {
     "require": "overdub/register",

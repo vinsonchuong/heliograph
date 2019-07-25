@@ -3172,7 +3172,7 @@ eslint-visitor-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/eslint-visitor-keys/-/eslint-visitor-keys-1.0.0.tgz#3f3180fb2e291017716acb4c9d6d5b5c34a6a81d"
   integrity sha512-qzm/XxIbxm/FHyH341ZrbnMUpe+5Bocte9xkmFMzPMjRaZMcXww+MpBptFvtU+79L362nqiLhekCxCxDPaUMBQ==
 
-eslint@>=6.0.1:
+eslint@>=6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/eslint/-/eslint-6.1.0.tgz#06438a4a278b1d84fb107d24eaaa35471986e646"
   integrity sha512-QhrbdRD7ofuV09IuE2ySWBz0FyXCq0rriLTZXZqaWSI79CVtHVRdkFuFTViiqzZhkCgfOh9USpriuGN2gIpZDQ==
@@ -7770,15 +7770,15 @@ standard-engine@>=11.0.1:
     minimist "^1.1.0"
     pkg-conf "^3.1.0"
 
-standard-esnext@^5.3.1:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/standard-esnext/-/standard-esnext-5.3.1.tgz#746860ed47176843bf5d1a00a1f45af79ef2c9f1"
-  integrity sha512-oo4naiekr5EtruIQS1AGVLiInZ+nfVK9W9D+UFAZ9HngV3A7OTKaQpoV3wh38WGzc9bd+H+/C7HvikeYWS7SIw==
+standard-esnext@^5.3.2:
+  version "5.3.2"
+  resolved "https://registry.yarnpkg.com/standard-esnext/-/standard-esnext-5.3.2.tgz#e416a372b52da08a4b53e4acaa373fda24b5b08e"
+  integrity sha512-EvDxsCfrSjmzr0CnkPWPqvcwpcbkGqIiZR0MCBRMjqHGOBUDtgvgenjqEanvxuWuCy6sSxD6MQUcjT5frEdhTA==
   dependencies:
     "@babel/core" ">=7.5.5"
     babel-eslint ">=10.0.2"
     babel-plugin-module-resolver ">=3.2.0"
-    eslint ">=6.0.1"
+    eslint ">=6.1.0"
     eslint-config-prettier ">=6.0.0"
     eslint-config-standard ">=13.0.1"
     eslint-config-standard-jsx ">=7.0.0"
