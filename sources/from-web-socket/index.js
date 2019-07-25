@@ -17,12 +17,12 @@ export default async function<OutgoingMessage, IncomingMessage>(
     rejectUnauthorized: parseUrl(url).hostname !== 'localhost'
   })
 
-  await pEvent(ws, 'open')
-
   const iterator = pEvent.iterator(ws, 'message', {
     resolutionEvents: ['close'],
     rejectionEvents: ['error']
   })
+
+  await pEvent(ws, 'open')
 
   return makeAsyncIterator({
     next: () => iterator.next(),

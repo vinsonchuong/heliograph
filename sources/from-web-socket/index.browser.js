@@ -13,8 +13,6 @@ export default async function<OutgoingMessage, IncomingMessage>(
 > {
   const ws = new WebSocket(url)
 
-  await pEvent(ws, 'open')
-
   const iterator = pipe(
     pEvent.iterator(ws, 'message', {
       resolutionEvents: ['close'],
@@ -22,6 +20,8 @@ export default async function<OutgoingMessage, IncomingMessage>(
     }),
     map(messageEvent => messageEvent.data)
   )
+
+  await pEvent(ws, 'open')
 
   return makeAsyncIterator({
     next: () => iterator.next(),
