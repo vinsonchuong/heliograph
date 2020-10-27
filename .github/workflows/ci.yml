@@ -8,6 +8,7 @@ jobs:
     - uses: actions/setup-node@v2-beta
       with:
         node-version: '*'
+        check-latest: true
     - uses: actions/cache@v2
       with:
         path: ~/.cache/yarn
