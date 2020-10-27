@@ -1,6 +1,6 @@
 # heliograph
 ![npm](https://img.shields.io/npm/v/heliograph.svg)
-[![Build Status](https://travis-ci.org/vinsonchuong/heliograph.svg?branch=master)](https://travis-ci.org/vinsonchuong/heliograph)
+[![CI Status](https://github.com/vinsonchuong/heliograph/workflows/CI/badge.svg)](https://github.com/vinsonchuong/heliograph/actions?query=workflow%3ACI)
 [![dependencies Status](https://david-dm.org/vinsonchuong/heliograph/status.svg)](https://david-dm.org/vinsonchuong/heliograph)
 [![devDependencies Status](https://david-dm.org/vinsonchuong/heliograph/dev-status.svg)](https://david-dm.org/vinsonchuong/heliograph?type=dev)
 
