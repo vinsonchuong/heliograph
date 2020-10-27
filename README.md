@@ -153,6 +153,10 @@ be provided; when emitted, they are translated into calls to `.end()` and
 #### `fromStream(readableStream)`
 Creates an async iterator that pulls values from a Readable Stream.
 
+Note that as of Node v11.14.0, `stream.Readable` instances are async iterators.
+So, there's no need to convert them. However, many third-party libraries don't
+yet include this interface change.
+
 ```js
 import * as fs from 'fs'
 import { fromStream } from 'heliograph'
