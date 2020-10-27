@@ -1,9 +1,8 @@
-/* @flow */
 import test from 'ava'
-import { pipe, toArray } from 'heliograph'
-import scan from './'
+import {pipe, toArray} from '../../index.js'
+import scan from './index.js'
 
-test('reducing over a running window', async t => {
+test('reducing over a running window', async (t) => {
   async function* stream() {
     yield 1
     yield 2

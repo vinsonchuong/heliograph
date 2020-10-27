@@ -1,10 +1,6 @@
-/* eslint-disable no-unmodified-loop-condition, flowtype/no-weak-types */
-/* @flow */
-import type { Readable } from 'stream'
+/* eslint-disable no-unmodified-loop-condition, no-await-in-loop */
 
-export default async function* /*:: <Item> */ ( /* eslint-disable-line */
-  stream: Readable
-): AsyncIterator<Item> {
+export default async function* (stream) {
   stream.pause()
 
   let ended = false
@@ -13,12 +9,12 @@ export default async function* /*:: <Item> */ ( /* eslint-disable-line */
   })
 
   let error = null
-  stream.on('error', err => {
+  stream.on('error', (err) => {
     error = err
   })
 
   while (!ended && !error) {
-    const data = (stream.read(): any)
+    const data = stream.read()
     if (data) {
       yield data
     } else {
@@ -32,7 +28,7 @@ export default async function* /*:: <Item> */ ( /* eslint-disable-line */
 }
 
 async function waitForEvent(eventEmitter, events) {
-  await new Promise(resolve => {
+  await new Promise((resolve) => {
     for (const event of events) {
       eventEmitter.once(event, resolve)
     }

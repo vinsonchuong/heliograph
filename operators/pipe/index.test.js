@@ -1,8 +1,7 @@
-/* @flow */
 import test from 'ava'
-import { pipe, map, filter } from 'heliograph'
+import {pipe, map, filter} from '../../index.js'
 
-test('piping an iterator into a series of operators', async t => {
+test('piping an iterator into a series of operators', async (t) => {
   async function* numbers() {
     yield 1
     yield 2
@@ -13,17 +12,17 @@ test('piping an iterator into a series of operators', async t => {
 
   const iterator = pipe(
     numbers(),
-    filter(n => n % 2 !== 0),
-    map(n => 3 * n)
+    filter((n) => n % 2 !== 0),
+    map((n) => 3 * n)
   )
 
-  t.deepEqual(await iterator.next(), { done: false, value: 3 })
-  t.deepEqual(await iterator.next(), { done: false, value: 9 })
-  t.deepEqual(await iterator.next(), { done: false, value: 15 })
-  t.deepEqual(await iterator.next(), { done: true, value: undefined })
+  t.deepEqual(await iterator.next(), {done: false, value: 3})
+  t.deepEqual(await iterator.next(), {done: false, value: 9})
+  t.deepEqual(await iterator.next(), {done: false, value: 15})
+  t.deepEqual(await iterator.next(), {done: true, value: undefined})
 })
 
-test('propagating errors', async t => {
+test('propagating errors', async (t) => {
   async function* numbers() {
     yield 1
   }
@@ -31,7 +30,7 @@ test('propagating errors', async t => {
   const iterator = pipe(
     numbers(),
     map(() => {
-      throw new Error()
+      throw new Error('Error')
     })
   )
 

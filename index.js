@@ -1,4 +1,3 @@
-/* @flow */
-export * from './sources'
-export * from './sinks'
-export * from './operators'
+export * from './sources/index.js'
+export * from './sinks/index.js'
+export * from './operators/index.js'

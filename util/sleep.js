@@ -1,7 +1,5 @@
-/* @flow */
-
-export default function(ms: number): Promise<void> {
-  return new Promise(resolve => {
+export default function (ms) {
+  return new Promise((resolve) => {
     setTimeout(resolve, ms)
   })
 }

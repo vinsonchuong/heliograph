@@ -1,8 +1,7 @@
-/* @flow */
 import test from 'ava'
-import fromClock from './'
+import fromClock from './index.js'
 
-test('ticking at the given interval length', async t => {
+test('ticking at the given interval length', async (t) => {
   const interval = 1 * 1000
 
   let iterations = 3

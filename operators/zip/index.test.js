@@ -1,9 +1,8 @@
-/* @flow */
 import test from 'ava'
-import { fromQueue } from 'heliograph'
-import zip from './'
+import {fromQueue} from '../../index.js'
+import zip from './index.js'
 
-test('grouping together items from multiple iterators', async t => {
+test('grouping together items from multiple iterators', async (t) => {
   async function* numbers() {
     yield 1
     yield 2
@@ -18,13 +17,13 @@ test('grouping together items from multiple iterators', async t => {
 
   const iterator = zip(numbers(), letters())
 
-  t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
-  t.deepEqual(await iterator.next(), { done: false, value: [2, 'b'] })
-  t.deepEqual(await iterator.next(), { done: false, value: [3, 'c'] })
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: false, value: [1, 'a']})
+  t.deepEqual(await iterator.next(), {done: false, value: [2, 'b']})
+  t.deepEqual(await iterator.next(), {done: false, value: [3, 'c']})
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('ending when the first iterator ends without emitting any items', async t => {
+test('ending when the first iterator ends without emitting any items', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -33,10 +32,10 @@ test('ending when the first iterator ends without emitting any items', async t =
   one.end()
   two.push('a')
 
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('ending when the second iterator ends without emitting any items', async t => {
+test('ending when the second iterator ends without emitting any items', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -45,10 +44,10 @@ test('ending when the second iterator ends without emitting any items', async t 
   one.push(1)
   two.end()
 
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('ending when the first iterator ends', async t => {
+test('ending when the first iterator ends', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -60,11 +59,11 @@ test('ending when the first iterator ends', async t => {
   two.push('a')
   two.push('b')
 
-  t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: false, value: [1, 'a']})
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('ending when the second iterator ends', async t => {
+test('ending when the second iterator ends', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -76,11 +75,11 @@ test('ending when the second iterator ends', async t => {
   two.push('a')
   two.end()
 
-  t.deepEqual(await iterator.next(), { done: false, value: [1, 'a'] })
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: false, value: [1, 'a']})
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('propagating errors thrown by the first iterator', async t => {
+test('propagating errors thrown by the first iterator', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -88,10 +87,10 @@ test('propagating errors thrown by the first iterator', async t => {
 
   one.pushError(new Error('Something Wrong'))
 
-  await t.throwsAsync(iterator.next(), 'Something Wrong')
+  await t.throwsAsync(iterator.next(), {message: 'Something Wrong'})
 })
 
-test('propagating errors thrown by the second iterator', async t => {
+test('propagating errors thrown by the second iterator', async (t) => {
   const one = fromQueue()
   const two = fromQueue()
 
@@ -99,5 +98,5 @@ test('propagating errors thrown by the second iterator', async t => {
 
   two.pushError(new Error('Something Wrong'))
 
-  await t.throwsAsync(iterator.next(), 'Something Wrong')
+  await t.throwsAsync(iterator.next(), {message: 'Something Wrong'})
 })

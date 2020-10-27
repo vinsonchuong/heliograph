@@ -1,9 +1,8 @@
-/* @flow */
 import test from 'ava'
-import { sleep } from 'heliograph/util'
-import merge from './'
+import {sleep} from '../../util/index.js'
+import merge from './index.js'
 
-test('merging async iterators', async t => {
+test('merging async iterators', async (t) => {
   async function* numbers() {
     await sleep(100)
     yield 1
@@ -21,25 +20,26 @@ test('merging async iterators', async t => {
 
   const iterator = merge(numbers(), otherNumbers())
 
-  t.deepEqual(await iterator.next(), { done: false, value: 42 })
-  t.deepEqual(await iterator.next(), { done: false, value: 1 })
-  t.deepEqual(await iterator.next(), { done: false, value: 2 })
-  t.deepEqual(await iterator.next(), { done: false, value: 43 })
-  t.deepEqual(await iterator.next(), { done: false, value: 44 })
-  t.deepEqual(await iterator.next(), { done: false, value: 3 })
-  t.deepEqual(await iterator.next(), { done: true })
+  t.deepEqual(await iterator.next(), {done: false, value: 42})
+  t.deepEqual(await iterator.next(), {done: false, value: 1})
+  t.deepEqual(await iterator.next(), {done: false, value: 2})
+  t.deepEqual(await iterator.next(), {done: false, value: 43})
+  t.deepEqual(await iterator.next(), {done: false, value: 44})
+  t.deepEqual(await iterator.next(), {done: false, value: 3})
+  t.deepEqual(await iterator.next(), {done: true})
 })
 
-test('propagating errors', async t => {
+test('propagating errors', async (t) => {
   async function* numbers() {
     await sleep(100)
     yield 1
   }
 
+  // eslint-disable-next-line require-yield
   async function* error() {
     throw new Error('Something Wrong')
   }
 
   const iterator = merge(numbers(), error())
-  await t.throwsAsync(iterator.next(), 'Something Wrong')
+  await t.throwsAsync(iterator.next(), {message: 'Something Wrong'})
 })

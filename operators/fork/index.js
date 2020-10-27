@@ -1,13 +1,7 @@
-/* @flow */
-import { fromQueue } from 'heliograph'
+import {fromQueue} from '../../index.js'
 
-export default function<Item>(
-  iterator: AsyncIterator<Item>,
-  times: number
-): $ReadOnlyArray<AsyncIterator<Item>> {
-  const copiedIterators = Array(times)
-    .fill(null)
-    .map(fromQueue)
+export default function (iterator, times) {
+  const copiedIterators = new Array(times).fill(null).map(() => fromQueue())
 
   async function copyItems() {
     try {
@@ -26,6 +20,7 @@ export default function<Item>(
       }
     }
   }
+
   copyItems()
 
   return copiedIterators

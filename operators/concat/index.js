@@ -1,7 +1,4 @@
-/* @flow */
-export default async function*/*:: <Item> */(
-  ...iterators /*: Array<AsyncIterator<Item>> */
-): AsyncIterator<Item> {
+export default async function* (...iterators) {
   for (const iterator of iterators) {
     yield* iterator
   }

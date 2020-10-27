@@ -1,13 +1,10 @@
-/* @flow */
-import { fromQueue } from 'heliograph'
+import {fromQueue} from '../../index.js'
 
-export default function<Item>(
-  ...iterators: Array<AsyncIterator<Item>>
-): AsyncIterator<Item> {
+export default function (...iterators) {
   const queue = fromQueue()
   const finishedIterators = new Set()
 
-  iterators.forEach(async iterator => {
+  iterators.forEach(async (iterator) => {
     try {
       for await (const value of iterator) {
         queue.push(value)
@@ -15,7 +12,7 @@ export default function<Item>(
 
       finishedIterators.add(iterator)
 
-      if (iterators.every(iterator => finishedIterators.has(iterator))) {
+      if (iterators.every((iterator) => finishedIterators.has(iterator))) {
         queue.end()
       }
     } catch (error) {

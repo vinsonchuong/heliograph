@@ -1,11 +1,6 @@
-/* @flow */
-import { makeAsyncIterator } from 'heliograph'
+import {makeAsyncIterator} from '../../index.js'
 
-export default function<Item>(): AsyncIterator<Item> & {
-  push: Item => void,
-  pushError: Error => void,
-  end: () => void
-} {
+export default function () {
   const queue = []
   let interrupt = null
   let error = null
@@ -14,18 +9,20 @@ export default function<Item>(): AsyncIterator<Item> & {
   return makeAsyncIterator({
     async next() {
       if (queue.length === 0 && !ended && !error) {
-        await new Promise(resolve => {
+        await new Promise((resolve) => {
           interrupt = resolve
         })
         interrupt = null
       }
 
       if (queue.length > 0) {
-        return { done: false, value: queue.shift() }
-      } else if (error) {
+        return {done: false, value: queue.shift()}
+      }
+
+      if (error) {
         throw error
       } else {
-        return { done: true }
+        return {done: true}
       }
     },
 

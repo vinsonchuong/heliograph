@@ -1,11 +1,7 @@
-/* @flow */
 /* eslint-disable no-async-promise-executor */
-import { makeAsyncIterator } from 'heliograph'
+import {makeAsyncIterator} from '../../index.js'
 
-export default function<Item1, Item2>(
-  iterator1: AsyncIterator<Item1>,
-  iterator2: AsyncIterator<Item2>
-): AsyncIterator<[Item1, Item2]> {
+export default function (iterator1, iterator2) {
   return makeAsyncIterator({
     async next() {
       const promise1 = iterator1.next()
@@ -14,8 +10,8 @@ export default function<Item1, Item2>(
       return Promise.race([
         new Promise(async (resolve, reject) => {
           try {
-            const { done } = await promise1
-            if (done) resolve({ done: true })
+            const {done} = await promise1
+            if (done) resolve({done: true})
           } catch (error) {
             reject(error)
           }
@@ -23,22 +19,22 @@ export default function<Item1, Item2>(
 
         new Promise(async (resolve, reject) => {
           try {
-            const { done } = await promise2
-            if (done) resolve({ done: true })
+            const {done} = await promise2
+            if (done) resolve({done: true})
           } catch (error) {
             reject(error)
           }
         }),
 
-        (async function() {
+        (async function () {
           const item1 = await promise1
           const item2 = await promise2
 
           if (item1.value && item2.value) {
-            return { done: false, value: [item1.value, item2.value] }
-          } else {
-            return { done: true }
+            return {done: false, value: [item1.value, item2.value]}
           }
+
+          return {done: true}
         })()
       ])
     }

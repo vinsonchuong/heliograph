@@ -1,8 +1,5 @@
-/* @flow */
-export default function<Item>(
-  predicate: (Item, Item) => boolean
-): (AsyncIterator<Item>) => AsyncIterator<Array<Item>> {
-  return async function*(iterator) {
+export default function (predicate) {
+  return async function* (iterator) {
     let currentGroup = []
 
     for await (const item of iterator) {

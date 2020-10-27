@@ -1,10 +1,8 @@
-/* @flow */
-export default async function<Item>(
-  iterator: AsyncIterator<Item>
-): Promise<Array<Item>> {
+export default async function (iterator) {
   const result = []
   for await (const item of iterator) {
     result.push(item)
   }
+
   return result
 }

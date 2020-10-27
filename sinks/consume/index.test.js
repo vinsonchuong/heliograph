@@ -1,8 +1,7 @@
-/* @flow */
 import test from 'ava'
-import { pipe, consume } from 'heliograph'
+import {pipe, consume} from '../../index.js'
 
-test('iterating over the items of an async iterator', async t => {
+test('iterating over the items of an async iterator', async (t) => {
   async function* numbers() {
     yield 1
     yield 2
@@ -13,6 +12,6 @@ test('iterating over the items of an async iterator', async t => {
   let expectedNumber = 1
   await pipe(
     numbers(),
-    consume(n => t.is(n, expectedNumber++))
+    consume((n) => t.is(n, expectedNumber++))
   )
 })

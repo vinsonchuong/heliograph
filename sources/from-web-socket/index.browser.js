@@ -1,16 +1,8 @@
-/* @flow */
 import WebSocket from 'isomorphic-ws'
 import pEvent from 'p-event'
-import { makeAsyncIterator, pipe, map } from 'heliograph'
+import {makeAsyncIterator, pipe, map} from '../../index.js'
 
-export default async function<OutgoingMessage, IncomingMessage>(
-  url: string
-): Promise<
-  AsyncIterator<IncomingMessage> & {
-    send: OutgoingMessage => Promise<void>,
-    close: () => Promise<void>
-  }
-> {
+export default async function (url) {
   const ws = new WebSocket(url)
 
   const iterator = pipe(
@@ -18,7 +10,7 @@ export default async function<OutgoingMessage, IncomingMessage>(
       resolutionEvents: ['close'],
       rejectionEvents: ['error']
     }),
-    map(messageEvent => messageEvent.data)
+    map((messageEvent) => messageEvent.data)
   )
 
   await pEvent(ws, 'open')

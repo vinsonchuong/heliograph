@@ -1,16 +1,14 @@
-/* @flow */
-import type EventEmitter from 'events'
-import { fromQueue } from 'heliograph'
+import {fromQueue} from '../../index.js'
 
-export default function<Item>(
-  eventEmitter: EventEmitter,
-  eventName: string,
-  endEventName: ?string,
-  errorEventName: ?string
-): AsyncIterator<Item> {
-  const queue = fromQueue<Item>()
+export default function (
+  eventEmitter,
+  eventName,
+  endEventName,
+  errorEventName
+) {
+  const queue = fromQueue()
 
-  eventEmitter.on(eventName, message => {
+  eventEmitter.on(eventName, (message) => {
     queue.push(message)
   })
 
@@ -21,7 +19,7 @@ export default function<Item>(
   }
 
   if (errorEventName) {
-    eventEmitter.once(errorEventName, error => {
+    eventEmitter.once(errorEventName, (error) => {
       queue.pushError(error)
     })
   }
