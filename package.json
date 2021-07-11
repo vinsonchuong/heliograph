@@ -12,6 +12,7 @@
   "browser": {
     "./sources/from-web-socket/index.js": "./sources/from-web-socket/index.browser.js"
   },
+  "main": "index.js",
   "scripts": {
     "test": "xo && ava",
     "release": "semantic-release"
