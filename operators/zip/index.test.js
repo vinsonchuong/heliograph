@@ -56,8 +56,7 @@ test('ending when the first iterator ends', async (t) => {
   one.push(1)
   one.end()
 
-  two.push('a')
-  two.push('b')
+  two.push('a', 'b')
 
   t.deepEqual(await iterator.next(), {done: false, value: [1, 'a']})
   t.deepEqual(await iterator.next(), {done: true})
@@ -69,8 +68,7 @@ test('ending when the second iterator ends', async (t) => {
 
   const iterator = zip(one, two)
 
-  one.push(1)
-  one.push(2)
+  one.push(1, 2)
 
   two.push('a')
   two.end()

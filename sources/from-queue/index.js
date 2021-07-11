@@ -33,8 +33,8 @@ export default function () {
       }
     },
 
-    pushError(err) {
-      error = err
+    pushError(error_) {
+      error = error_
       if (interrupt) {
         interrupt()
       }

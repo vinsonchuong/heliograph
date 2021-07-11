@@ -9,8 +9,8 @@ export default async function* (stream) {
   })
 
   let error = null
-  stream.on('error', (err) => {
-    error = err
+  stream.on('error', (error_) => {
+    error = error_
   })
 
   while (!ended && !error) {

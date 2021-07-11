@@ -19,16 +19,16 @@
   },
   "dependencies": {
     "isomorphic-ws": "^4.0.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "p-event": "^4.2.0",
     "pify": "^5.0.0",
-    "ws": "^7.3.1"
+    "ws": "^7.5.3"
   },
   "devDependencies": {
-    "ava": "^3.13.0",
-    "into-stream": "^6.0.0",
-    "semantic-release": "^17.2.1",
-    "xo": "^0.34.1"
+    "ava": "^3.15.0",
+    "into-stream": "^7.0.0",
+    "semantic-release": "^17.4.4",
+    "xo": "^0.41.0"
   },
   "ava": {
     "verbose": true
@@ -42,7 +42,10 @@
       "import/extensions": "off",
       "import/no-anonymous-default-export": "off",
       "import/no-useless-path-segments": "off",
-      "unicorn/import-index": "off"
+      "unicorn/import-index": "off",
+      "unicorn/no-array-for-each": "off",
+      "unicorn/no-array-push-push": "off",
+      "unicorn/no-new-array": "off"
     }
   }
 }

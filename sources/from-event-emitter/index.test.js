@@ -1,5 +1,5 @@
+import EventEmitter from 'node:events'
 import test from 'ava'
-import EventEmitter from 'events'
 import fromEventEmitter from './index.js'
 
 test('queueing up events', async (t) => {
