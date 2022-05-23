@@ -13,7 +13,7 @@ test('piping an iterator into a series of operators', async (t) => {
   const iterator = pipe(
     numbers(),
     filter((n) => n % 2 !== 0),
-    map((n) => 3 * n)
+    map((n) => 3 * n),
   )
 
   t.deepEqual(await iterator.next(), {done: false, value: 3})
@@ -31,7 +31,7 @@ test('propagating errors', async (t) => {
     numbers(),
     map(() => {
       throw new Error('Error')
-    })
+    }),
   )
 
   await t.throwsAsync(iterator.next())

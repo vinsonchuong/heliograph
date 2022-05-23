@@ -8,9 +8,9 @@ export default async function (url) {
   const iterator = pipe(
     pEvent.iterator(ws, 'message', {
       resolutionEvents: ['close'],
-      rejectionEvents: ['error']
+      rejectionEvents: ['error'],
     }),
-    map((messageEvent) => messageEvent.data)
+    map((messageEvent) => messageEvent.data),
   )
 
   await pEvent(ws, 'open')
@@ -18,9 +18,9 @@ export default async function (url) {
   return makeAsyncIterator({
     next: () => iterator.next(),
     send: (...args) => ws.send(...args),
-    close: async () => {
+    async close() {
       ws.close()
       await pEvent(ws, 'close')
-    }
+    },
   })
 }

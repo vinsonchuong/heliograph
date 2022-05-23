@@ -10,7 +10,7 @@ test('defining an async iterator', async (t) => {
       }
 
       return {done: true}
-    }
+    },
   })
 
   const values = []

@@ -45,6 +45,6 @@ export default function () {
       if (interrupt) {
         interrupt()
       }
-    }
+    },
   })
 }

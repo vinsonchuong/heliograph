@@ -15,7 +15,7 @@ test('reducing over a running window', async (t) => {
   const groups = await pipe(
     stream(),
     scan(2, ([x, y]) => x + y),
-    toArray
+    toArray,
   )
 
   t.deepEqual(groups, [null, 3, 5, 7, 9, 11])

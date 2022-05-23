@@ -15,12 +15,12 @@ test('partitioning items into groups', async (t) => {
   const groups = await pipe(
     streamItems(),
     partition((x, y) => x.group !== y.group),
-    toArray
+    toArray,
   )
 
   t.deepEqual(groups, [
     [{group: 1}, {group: 1}],
     [{group: 2}],
-    [{group: 3}, {group: 3}, {group: 3}]
+    [{group: 3}, {group: 3}, {group: 3}],
   ])
 })

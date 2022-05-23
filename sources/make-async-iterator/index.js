@@ -3,6 +3,6 @@ export default function (properties) {
     [Symbol.asyncIterator]() {
       return this
     },
-    ...properties
+    ...properties,
   }
 }

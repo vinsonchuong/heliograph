@@ -6,7 +6,7 @@ test('converting a stream to an async iterator', async (t) => {
   const stream = intoStream.object([
     {word: 'foo'},
     {word: 'bar'},
-    {word: 'baz'}
+    {word: 'baz'},
   ])
 
   const iterator = fromStream(stream)

@@ -12,7 +12,7 @@ test('iterating over the items of an async iterator', async (t) => {
   let expectedNumber = 1
   const iterator = pipe(
     numbers(),
-    observe((n) => t.is(n, expectedNumber++))
+    observe((n) => t.is(n, expectedNumber++)),
   )
 
   t.deepEqual(await iterator.next(), {done: false, value: 1})

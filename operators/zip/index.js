@@ -35,8 +35,8 @@ export default function (iterator1, iterator2) {
           }
 
           return {done: true}
-        })()
+        })(),
       ])
-    }
+    },
   })
 }

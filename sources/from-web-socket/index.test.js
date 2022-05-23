@@ -2,7 +2,7 @@ import test from 'ava'
 import fromWebSocket from './index.js'
 
 test('subscribing to a WebSocket feed', async (t) => {
-  const socket = await fromWebSocket('wss://echo.websocket.org/')
+  const socket = await fromWebSocket('wss://ws.postman-echo.com/raw')
 
   await socket.send('One')
   await socket.send('Two')

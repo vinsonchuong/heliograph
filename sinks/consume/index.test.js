@@ -12,6 +12,6 @@ test('iterating over the items of an async iterator', async (t) => {
   let expectedNumber = 1
   await pipe(
     numbers(),
-    consume((n) => t.is(n, expectedNumber++))
+    consume((n) => t.is(n, expectedNumber++)),
   )
 })
