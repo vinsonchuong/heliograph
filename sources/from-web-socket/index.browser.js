@@ -1,12 +1,11 @@
-import WebSocket from 'isomorphic-ws'
-import pEvent from 'p-event'
+import {pEvent, pEventIterator} from 'p-event'
 import {makeAsyncIterator, pipe, map} from '../../index.js'
 
 export default async function (url) {
   const ws = new WebSocket(url)
 
   const iterator = pipe(
-    pEvent.iterator(ws, 'message', {
+    pEventIterator(ws, 'message', {
       resolutionEvents: ['close'],
       rejectionEvents: ['error'],
     }),

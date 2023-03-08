@@ -150,6 +150,35 @@ is emitted, its value is enqueued. Optionally, an end event or error event can
 be provided; when emitted, they are translated into calls to `.end()` and
 `.pushError(error)`, respectively.
 
+#### `fromEventTarget(eventTarget, eventName, options?)`
+Creates an async iterator that queues up events from an
+[`EventTarget`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget),
+commonly used by DOM objects.
+
+```js
+import { fromEventTarget } from 'heliograph'
+
+async function run() {
+  const button = document.createElement('button')
+  const iterator = fromEventEmitter(button, 'click', { passive: true })
+
+  button.click()
+  button.click()
+
+  for await (const message of iterator) {
+    console.log(message)
+  }
+}
+
+run()
+```
+
+An optional third argument, when given, will be passed directly to
+[`EventTarget.addEventListener()`](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener).
+
+With semantics similar to [`fromQueue()`](#fromqueue), whenever a message event
+is emitted, its value is enqueued.
+
 #### `fromStream(readableStream)`
 Creates an async iterator that pulls values from a Readable Stream.
 

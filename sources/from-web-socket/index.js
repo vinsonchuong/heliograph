@@ -1,4 +1,4 @@
-import WebSocket from 'isomorphic-ws'
+import WebSocket from 'ws'
 import pify from 'pify'
 import {pEvent, pEventIterator} from 'p-event'
 import {makeAsyncIterator} from '../../index.js'
