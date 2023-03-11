@@ -1,4 +1,4 @@
-/* eslint-disable no-unmodified-loop-condition, no-await-in-loop */
+/* eslint-disable no-unmodified-loop-condition */
 
 export default async function* (stream) {
   stream.pause()
