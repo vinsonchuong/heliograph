@@ -2,6 +2,7 @@ export {default as concat} from './concat/index.js'
 export {default as fork} from './fork/index.js'
 export {default as merge} from './merge/index.js'
 export {default as pipe} from './pipe/index.js'
+export {default as sample} from './sample/index.js'
 export {default as zip} from './zip/index.js'
 
 export {default as filter} from './filter/index.js'

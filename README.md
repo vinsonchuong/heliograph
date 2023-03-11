@@ -486,6 +486,25 @@ async function run() {
 run()
 ```
 
+#### `sample(values, schedule)`
+Downsample the values of an async iterator based on when and how often a
+scheduler async iterator emits ticks.
+
+```javascript
+import { fromEventTarget, fromClock, sample } from 'heliograph'
+
+const button = document.querySelector('div')
+const clicks = fromEventEmitter(button, 'mousemove', { passive: true })
+
+const ms100 = fromClock(100)
+
+const sampledClicks = sample(values, ms100)
+
+for await(const event of sample(clicks, ms100)) {
+  console.log(event)
+}
+```
+
 #### `scan(windowSize, transform)(iterator)`
 Compute values from a rolling window
 
