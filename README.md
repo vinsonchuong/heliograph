@@ -331,6 +331,26 @@ async function run() {
 run()
 ```
 
+#### `forEach(processItem)(iterator)`
+Consume and process items emitted by an async iterator, returning a promise that
+resolves when the iterator ends.
+
+This is an alternative to `for await` to make it easier to process multiple
+iterators at once.
+
+```js
+import { forEach } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+}
+
+forEach((n) => console.log(n))(numbers())
+
+```
+
 #### `fork(iterator, times)`
 Copy an async iterator so that separate operators can be applied
 
@@ -429,7 +449,6 @@ async function run() {
 }
 
 run()
-
 ```
 
 #### `partition(predicate)(iterator)`
