@@ -2,15 +2,9 @@ import {fromQueue} from '../../index.js'
 
 const waiting = Symbol('waiting')
 
-export default function (values, sampler) {
+export default function (sampler) {
   const samples = fromQueue()
   let currentValue = waiting
-
-  async function readCurrentValue() {
-    for await (const value of values) {
-      currentValue = value
-    }
-  }
 
   async function takeSample() {
     // eslint-disable-next-line no-unused-vars
@@ -22,8 +16,16 @@ export default function (values, sampler) {
     }
   }
 
-  readCurrentValue()
-  takeSample()
+  return (values) => {
+    async function readCurrentValue() {
+      for await (const value of values) {
+        currentValue = value
+      }
+    }
 
-  return samples
+    readCurrentValue()
+    takeSample()
+
+    return samples
+  }
 }

@@ -1,13 +1,12 @@
 import {setTimeout} from 'node:timers/promises'
 import test from 'ava'
-import {fromQueue, fromClock} from '../../index.js'
+import {fromQueue, fromClock, pipe} from '../../index.js'
 import sample from './index.js'
 
 test('sampling an async iterator at specific intervals', async (t) => {
   const values = fromQueue()
   const sampler = fromQueue()
-
-  const samples = sample(values, sampler)
+  const samples = pipe(values, sample(sampler))
 
   values.push(1)
   await Promise.resolve()
@@ -32,8 +31,7 @@ test('sampling an async iterator at specific intervals', async (t) => {
 
 test('sampling an async iterator at fixed time intervals', async (t) => {
   const values = fromQueue()
-  const ms100 = fromClock(100)
-  const samples = sample(values, ms100)
+  const samples = pipe(values, sample(fromClock(100)))
 
   await setTimeout(200)
   values.push(1)
