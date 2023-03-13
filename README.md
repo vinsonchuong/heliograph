@@ -331,26 +331,6 @@ async function run() {
 run()
 ```
 
-#### `forEach(processItem)(iterator)`
-Consume and process items emitted by an async iterator, returning a promise that
-resolves when the iterator ends.
-
-This is an alternative to `for await` to make it easier to process multiple
-iterators at once.
-
-```js
-import { forEach } from 'heliograph'
-
-async function* numbers() {
-  yield 1
-  yield 2
-  yield 3
-}
-
-forEach((n) => console.log(n))(numbers())
-
-```
-
 #### `fork(iterator, times)`
 Copy an async iterator so that separate operators can be applied
 
@@ -505,21 +485,21 @@ async function run() {
 run()
 ```
 
-#### `sample(values, schedule)`
+#### `sample(schedule)(value)`
 Downsample the values of an async iterator based on when and how often a
 scheduler async iterator emits ticks.
 
 ```javascript
-import { fromEventTarget, fromClock, sample } from 'heliograph'
+import { fromEventTarget, fromClock, pipe, sample } from 'heliograph'
 
-const button = document.querySelector('div')
-const clicks = fromEventEmitter(button, 'mousemove', { passive: true })
+const div = document.querySelector('div')
 
-const ms100 = fromClock(100)
+const throttledMouseMoves = pipe(
+  fromEventEmitter(div, 'mousemove', { passive: true }),
+  sample(fromClock(100))
+)
 
-const sampledClicks = sample(values, ms100)
-
-for await(const event of sample(clicks, ms100)) {
+for await(const event of throttledMouseMoves) {
   console.log(event)
 }
 ```

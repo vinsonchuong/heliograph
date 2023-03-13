@@ -1,5 +1,4 @@
 export {default as concat} from './concat/index.js'
-export {default as forEach} from './for-each/index.js'
 export {default as fork} from './fork/index.js'
 export {default as merge} from './merge/index.js'
 export {default as pipe} from './pipe/index.js'
