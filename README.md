@@ -485,7 +485,7 @@ async function run() {
 run()
 ```
 
-#### `sample(schedule)(value)`
+#### `sample(scheduleIterator)(valueIterator)`
 Downsample the values of an async iterator based on when and how often a
 scheduler async iterator emits ticks.
 
