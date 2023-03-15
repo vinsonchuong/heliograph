@@ -504,6 +504,32 @@ for await(const event of throttledMouseMoves) {
 }
 ```
 
+#### `scan(accumulate, initialValue)(iterator)`
+Combine (or reduce) values one at a time, emitting the current accumulated value
+each time.
+
+```javascript
+import { scan } from 'heliograph'
+
+async function* numbers() {
+  yield 1
+  yield 2
+  yield 3
+  yield 4
+  yield 5
+}
+
+async function run() {
+  const runningTotal = scan((acc, n) => acc + n, 0)(numbers())
+
+  for await (const total of runningTotal) {
+    console.log(total)
+  }
+}
+
+run()
+```
+
 #### `scanWindow(windowSize, transform)(iterator)`
 Compute values from a rolling window
 
