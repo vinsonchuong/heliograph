@@ -1,6 +1,6 @@
 import test from 'ava'
 import {pipe, toArray} from '../../index.js'
-import scan from './index.js'
+import scanWindow from './index.js'
 
 test('reducing over a running window', async (t) => {
   async function* stream() {
@@ -14,7 +14,7 @@ test('reducing over a running window', async (t) => {
 
   const groups = await pipe(
     stream(),
-    scan(2, ([x, y]) => x + y),
+    scanWindow(2, ([x, y]) => x + y),
     toArray,
   )
 

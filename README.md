@@ -504,11 +504,11 @@ for await(const event of throttledMouseMoves) {
 }
 ```
 
-#### `scan(windowSize, transform)(iterator)`
+#### `scanWindow(windowSize, transform)(iterator)`
 Compute values from a rolling window
 
-```js
-import { scan } from 'heliograph'
+```javascript
+import { scanWindow } from 'heliograph'
 
 async function* numbers() {
   yield 1
@@ -519,7 +519,7 @@ async function* numbers() {
 }
 
 async function run() {
-  const addedNumbers = scan(3, (x, y, z) => x + y + z)(numbers())
+  const addedNumbers = scanWindow(3, (x, y, z) => x + y + z)(numbers())
 
   for await (const addedNumber of addedNumbers) {
     console.log(addedNumber)
